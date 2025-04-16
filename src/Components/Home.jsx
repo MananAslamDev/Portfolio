@@ -1,4 +1,5 @@
 import Navbar from "./NavBar";
+import Button from "./Button";
 const Home = () => {
   return (
     <>
@@ -7,12 +8,13 @@ const Home = () => {
       <div className="homeContent">
         <h2>I'm a</h2>
         <h1 className="mainTitle">
-          FULL STACK
+          FRONT END
           <br />
-          SOFTWARE
+          REACT
           <br />
           DEVELOPER<span className="dot">.</span>
         </h1>
+        <Button text="My Recent Projects" className="ProjectsButton"></Button>
       </div>
     </>
   );

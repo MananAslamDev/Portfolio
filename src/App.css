@@ -81,7 +81,7 @@ ul li a:active {
 }
 
 .homeContent {
-  padding: 100px 100px;
+  padding: 50px;
   position: relative;
   z-index: 2;
   text-align: left;
@@ -108,4 +108,19 @@ ul li a:active {
 
 .mainTitle .dot {
   color: #39bdf8; 
+}
+
+.ProjectsButton {
+  height: 50px;
+  background: linear-gradient(90deg, #00bcd4, #0a0f5c);
+  background-size: 200% 100%;
+  background-position: left;
+  transition: background-position 0.5s ease;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+
+}
+
+.ProjectsButton:hover {
+  background-position: right;
 }
