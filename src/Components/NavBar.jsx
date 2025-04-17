@@ -1,10 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Button from "./Button";
+import HeaderLogo  from "../assets/HeaderLogo.png";
 const Navbar = () => {
   return (
     <header className="Header">
-      <h2>Manan Aslam</h2>
+      <img src={HeaderLogo} alt="MA LOGO" className="HeaderLogo"></img>
       <nav className="NavBar">
         <ul className="NavLists">
           <li className="NavItems">

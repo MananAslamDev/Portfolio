@@ -1,31 +1,54 @@
 import Navbar from "./NavBar";
 import Button from "./Button";
-import Avatar from '../assets/Avatar.png'
+import Avatar from "../assets/Avatar.png";
+import { motion } from "framer-motion";
+
+const imageVariants = {
+  hidden: { opacity: 0, scale: 0.9, y: 30 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      ease: "easeOut",
+    },
+  },
+};
 const Home = () => {
   return (
     <>
       <Navbar />
       <h3 className="HomeBgText">Developer</h3>
+
       <div className="HomeLayout">
         <div className="homeContent">
           <h2>I'm a</h2>
-          <h1 className="mainTitle">
+          <motion.h1
+            className="mainTitle"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
             FRONT END
             <br />
             REACT
             <br />
             DEVELOPER<span className="dot">.</span>
-          </h1>
+          </motion.h1>
           <Button text="My Recent Projects" className="ProjectsButton"></Button>
         </div>
-        <div className="ImageContainer">
+        <motion.div className="ImageContainer">
           <div className="BorederLines"></div>
-          <img
+          <motion.img
             src={Avatar}
             alt="Profile"
-            className="blobImage"
+            className="homeImage"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
           />
-        </div>
+        </motion.div>
       </div>
     </>
   );
