@@ -1,4 +1,3 @@
-import Navbar from "./NavBar";
 import Button from "./Button";
 import Avatar from "../assets/Avatar.png";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -18,14 +17,11 @@ const imageVariants = {
 };
 const Home = () => {
   const scrollRef = useRef(null);
-
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, -200]);
+  const y = useTransform(scrollY, [0, 500], [0, 200]);
+
   return (
     <>
-      <div className="relative z-50">
-        <Navbar />
-      </div>
       <div ref={scrollRef} className="relative overflow-hidden">
         <motion.h3
           style={{ y }}
@@ -58,7 +54,7 @@ const Home = () => {
             <motion.img
               src={Avatar}
               alt="Profile"
-              className="relative lg:top-[-53%] lg:left-[55%] md:left-[55%] md:top-[-53%] top-[10%] left-[75%] transform -translate-x-1/2 -translate-y-1/2 lg:h-[500px] lg:w-[350px] md:h-[500px] md:w-[350px] h-[200px] w-[150px] object-contain shadow-[0_5px_15px_rgba(0,_0,_0,_0.2)] overflow-hidden"
+              className="relative lg:top-[-53%] lg:left-[55%] md:left-[55%] md:top-[-53%] top-[10%] left-[75%] transform -translate-x-1/2 -translate-y-1/2 lg:h-[500px] lg:w-[350px] md:h-[500px] md:w-[350px] h-[200px] w-[150px] object-contain shadow-[0_5px_15px_rgba(0,_0,_0,_0.2)] overflow-hidden z-30"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
