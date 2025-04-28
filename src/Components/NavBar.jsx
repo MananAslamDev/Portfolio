@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Button from "./Button";
 import HeaderLogo from "../assets/HeaderLogo.png";
@@ -9,6 +9,19 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  // ⭐️ Lock scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <header className="bg-[#0f172a] px-10 py-2.5 flex flex-row items-center justify-between text-center border-b border-white rounded-lg shadow-[0_0_10px_rgba(255,255,255,0.2)] box-border mt-[6px]">
@@ -32,10 +45,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="NavItems">
-            <NavLink
-              to="/portfolio"
-              className="text-white hover:text-[#00bcd4]"
-            >
+            <NavLink to="/portfolio" className="text-white hover:text-[#00bcd4]">
               PORTFOLIO
             </NavLink>
           </li>
@@ -45,10 +55,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="NavItems">
-            <NavLink
-              to="/experience"
-              className="text-white hover:text-[#00bcd4]"
-            >
+            <NavLink to="/experience" className="text-white hover:text-[#00bcd4]">
               EXPERIENCE
             </NavLink>
           </li>
@@ -82,10 +89,23 @@ const Navbar = () => {
           {/* Close Button */}
           <button
             onClick={() => setIsMobileMenuOpen(false)}
-            className="absolute top-4 right-4 text-white text-3xl hover:text-[#00bcd4] transition duration-300"
+            className="absolute top-8 right-8 text-white hover:text-[#00bcd4] transition duration-300"
             aria-label="Close Menu"
           >
-            &times;
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
           </button>
 
           <nav>
