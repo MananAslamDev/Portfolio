@@ -21,7 +21,7 @@ const About = () => {
           alt="Developer Profile"
           width={300}
           height={400}
-          className="rounded-lg border-4 border-[#3b82f6]"
+          className="rounded-lg border-4 border-[#00bcd4]"
         />
       </div>
       <div className="bg-[#111827] p-8 rounded-lg">
