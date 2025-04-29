@@ -9,7 +9,6 @@ import PortfolioSS from "../assets/PortfolioSS.png";
 const Portfolio = () => {
   const [activeTab, setActiveTab] = useState("DashBoard");
 
-  // Project data - you can replace with your actual projects
   const projects = {
       DashBoard: [
         {
@@ -57,7 +56,6 @@ const Portfolio = () => {
     ],
   };
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
