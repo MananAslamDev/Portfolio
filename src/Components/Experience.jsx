@@ -30,7 +30,7 @@ const Experience = () => {
   useEffect(() => {
     if (containerRef.current && itemRef.current) {
       const itemWidth = itemRef.current.offsetWidth;
-      const gap = 64; // Matches gap-16 (16 * 4px = 64px)
+      const gap = 64;
       const total = (itemWidth + gap) * technologies.length;
       setTotalWidth(total);
     }
@@ -39,7 +39,7 @@ const Experience = () => {
     const handleResize = () => {
       if (containerRef.current && itemRef.current) {
         const itemWidth = itemRef.current.offsetWidth;
-        const gap = window.innerWidth < 640 ? 16 : 64; // Adjust gap for mobile
+        const gap = window.innerWidth < 640 ? 16 : 64;
         const total = (itemWidth + gap) * technologies.length;
         setTotalWidth(total);
       }

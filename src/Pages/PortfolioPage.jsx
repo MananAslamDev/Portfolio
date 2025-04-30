@@ -1,7 +1,7 @@
 import Portfolio from "../Components/Portfolio";
 
 const PortfolioPage = () => {
-  return <Portfolio />;
+  return <Portfolio isPortfolio={true}/>;
 };
 
 export default PortfolioPage;

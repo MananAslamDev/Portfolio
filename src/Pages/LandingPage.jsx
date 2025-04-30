@@ -9,7 +9,7 @@ const LandingPage = () => {
         <>
             <Home/>
             <About/>
-            <Portfolio/>
+            <Portfolio isPortfolio={false}/>
             <Services/>
             <Experience/>
         </>

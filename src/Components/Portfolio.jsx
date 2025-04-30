@@ -6,7 +6,7 @@ import DashBoard from "../assets/DashBoard.png";
 import WeatherApp from "../assets/WeatherApp.png";
 import PortfolioSS from "../assets/PortfolioSS.png";
 
-const Portfolio = () => {
+const Portfolio = ({isPortfolio}) => {
   const [activeTab, setActiveTab] = useState("DashBoard");
 
   const projects = {
@@ -167,14 +167,14 @@ const Portfolio = () => {
         </motion.div>
       </AnimatePresence>
 
-      <motion.div
+      {!isPortfolio && <motion.div
         className="text-center mt-16"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
         <Button text={"View All Projects"} />
-      </motion.div>
+      </motion.div>}
     </div>
   );
 };
