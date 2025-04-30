@@ -6,21 +6,21 @@ import DashBoard from "../assets/DashBoard.png";
 import WeatherApp from "../assets/WeatherApp.png";
 import PortfolioSS from "../assets/PortfolioSS.png";
 
-const Portfolio = ({isPortfolio}) => {
+const Portfolio = ({ isPortfolio = false }) => {
   const [activeTab, setActiveTab] = useState("DashBoard");
 
   const projects = {
-      DashBoard: [
-        {
-          id: 1,
-          title: "DashBoard",
-          category: "PROJECT 1",
-          description:
-            "A modern, responsive dashboard interface designed to streamline business operations and provide real-time insights. The dashboard features intuitive navigation, dynamic data management, and interactive components tailored for efficient monitoring and control of various business activities. Built with a focus on user experience and performance, it serves as a central hub for managing tasks, visualizing data, and enhancing workflow productivity.",
-          image: DashBoard,
-          color: "bg-emerald-300",
-        },
-      ],
+    DashBoard: [
+      {
+        id: 1,
+        title: "DashBoard",
+        category: "PROJECT 1",
+        description:
+          "A modern, responsive dashboard interface designed to streamline business operations and provide real-time insights. The dashboard features intuitive navigation, dynamic data management, and interactive components tailored for efficient monitoring and control of various business activities. Built with a focus on user experience and performance, it serves as a central hub for managing tasks, visualizing data, and enhancing workflow productivity.",
+        image: DashBoard,
+        color: "bg-emerald-300",
+      },
+    ],
     BusinessWebsite: [
       {
         id: 2,
@@ -55,6 +55,17 @@ const Portfolio = ({isPortfolio}) => {
       },
     ],
   };
+
+  const getAllProjects = () => {
+    let allProjects = [];
+    Object.values(projects).forEach((projectArray) => {
+      allProjects = [...allProjects, ...projectArray];
+    });
+    // Sort by ID to maintain order
+    return allProjects.sort((a, b) => a.id - b.id);
+  };
+
+  const displayProjects = isPortfolio ? getAllProjects() : projects[activeTab];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -95,29 +106,31 @@ const Portfolio = ({isPortfolio}) => {
         Explore my latest projects across different platforms and technologies
       </motion.p>
 
-      {/* Tab selector container */}
-      <div className="relative mb-16">
-        <div className="flex flex-wrap justify-center gap-2 md:gap-8 bg-[#1e293b] p-4 rounded-xl shadow-lg">
-          {Object.keys(projects).map((tab) => (
-            <button
-              key={tab}
-              className={`py-3 px-6 rounded-lg font-medium transition-all duration-300 ${
-                activeTab === tab
-                  ? "bg-[linear-gradient(90deg,_#00bcd4,_#0a0f5c)] bg-[length:200%_100%] bg-left hover:bg-right transition-[background-position]"
-                  : "text-gray-300 hover:text-white hover:bg-[#2d3748]"
-              }`}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
+      {/* Tab selector container - only show when not in full display mode */}
+      {!isPortfolio && (
+        <div className="relative mb-16">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-8 bg-[#1e293b] p-4 rounded-xl shadow-lg">
+            {Object.keys(projects).map((tab) => (
+              <button
+                key={tab}
+                className={`py-3 px-6 rounded-lg font-medium transition-all duration-300 ${
+                  activeTab === tab
+                    ? "bg-[linear-gradient(90deg,_#00bcd4,_#0a0f5c)] bg-[length:200%_100%] bg-left hover:bg-right transition-[background-position]"
+                    : "text-gray-300 hover:text-white hover:bg-[#2d3748]"
+                }`}
+                onClick={() => setActiveTab(tab)}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Project display area */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={activeTab}
+          key={isPortfolio ? "all-projects" : activeTab}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -130,15 +143,14 @@ const Portfolio = ({isPortfolio}) => {
             animate="visible"
             className="space-y-20"
           >
-            {projects[activeTab].map((project, index) => (
+            {displayProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 variants={itemVariants}
-                className={`grid md:grid-cols-2 gap-8 items-center ${
-                  index % 2 === 1 ? "md:flex-row-reverse" : ""
-                }`}
+                className={`grid md:grid-cols-2 gap-8 items-center`}
               >
-                <div className={index % 2 === 1 ? "md:order-2" : ""}>
+                {/* Text content - switches sides based on index */}
+                <div className="md:order-2">
                   <div className="text-[#00bcd4] mb-2 font-medium">
                     {project.category}
                   </div>
@@ -148,12 +160,10 @@ const Portfolio = ({isPortfolio}) => {
                   </p>
                   <Button text="View Details" variant="outline" />
                 </div>
+
+                {/* Image content - switches sides based on index */}
                 <div
-                  className={`${
-                    project.color
-                  } p-4 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 ${
-                    index % 2 === 1 ? "md:order-1" : ""
-                  }`}
+                  className={`${project.color} p-4 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300`}
                 >
                   <img
                     src={project.image}
@@ -167,14 +177,17 @@ const Portfolio = ({isPortfolio}) => {
         </motion.div>
       </AnimatePresence>
 
-      {!isPortfolio && <motion.div
-        className="text-center mt-16"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-      >
-        <Button text={"View All Projects"} />
-      </motion.div>}
+      {/* Show 'View All Projects' button only in tabbed mode and not on full portfolio page */}
+      {!isPortfolio && (
+        <motion.div
+          className="text-center mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+        >
+          <Button text={"View All Projects"} />
+        </motion.div>
+      )}
     </div>
   );
 };
