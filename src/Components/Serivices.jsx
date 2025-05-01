@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Code, Layout, Globe, Search, ChevronRight } from "lucide-react";
 
-const Services = () => {
+const Services = ({isFullDisplay = false}) => {
   const [hoveredCard, setHoveredCard] = useState(null);
+  useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
 
   const services = [
     {
@@ -115,14 +119,14 @@ const Services = () => {
               <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
 
               <p className="text-gray-300 mb-6">{service.description}</p>
-
+              <Link to="/services">
               <motion.div
                 className="mt-auto flex items-center text-[#00bcd4] font-medium"
                 animate={hoveredCard === service.id ? { x: 5 } : { x: 0 }}
                 transition={{ duration: 0.2 }}
               >
                 Learn more <ChevronRight className="w-4 h-4 ml-1" />
-              </motion.div>
+              </motion.div></Link>
 
               <motion.div
                 className="absolute -bottom-1 left-0 w-full h-1 bg-[#00bcd4]"

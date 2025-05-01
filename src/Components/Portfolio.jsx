@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import LLEI from "../assets/LLEI.png";
 import DashBoard from "../assets/DashBoard.png";
 import WeatherApp from "../assets/WeatherApp.png";
 import PortfolioSS from "../assets/PortfolioSS.png";
 
-const Portfolio = ({ isPortfolio = false }) => {
+const Portfolio = ({ isFullDisplay = false }) => {
   const [activeTab, setActiveTab] = useState("DashBoard");
+  const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   const projects = {
     DashBoard: [
@@ -40,7 +45,7 @@ const Portfolio = ({ isPortfolio = false }) => {
         description:
           "A sleek and responsive weather application that delivers real-time weather updates and forecasts for any location worldwide. It features a clean UI, dynamic background changes based on weather conditions, and detailed metrics such as temperature, humidity, wind speed, and 7-day forecasts. Built for both performance and usability, the app ensures quick access to accurate weather data using modern APIs and smooth animations for an engaging user experience.",
         image: WeatherApp,
-        color: "bg-blue-300",
+        color: "bg-cyan-300",
       },
     ],
     Portfolio: [
@@ -51,7 +56,7 @@ const Portfolio = ({ isPortfolio = false }) => {
         description:
           "A sleek and responsive portfolio website crafted to showcase my projects, skills, and experience as a frontend developer. Designed with a focus on aesthetics and usability, it features smooth animations, interactive UI elements, and a dark theme. Visitors can explore categorized projects, download my resume, and connect via integrated social links. Built using modern web technologies to reflect my passion for clean design and functional development.",
         image: PortfolioSS,
-        color: "bg-purple-500",
+        color: "bg-purple-300",
       },
     ],
   };
@@ -65,7 +70,7 @@ const Portfolio = ({ isPortfolio = false }) => {
     return allProjects.sort((a, b) => a.id - b.id);
   };
 
-  const displayProjects = isPortfolio ? getAllProjects() : projects[activeTab];
+  const displayProjects = isFullDisplay ? getAllProjects() : projects[activeTab];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -107,7 +112,7 @@ const Portfolio = ({ isPortfolio = false }) => {
       </motion.p>
 
       {/* Tab selector container - only show when not in full display mode */}
-      {!isPortfolio && (
+      {!isFullDisplay && (
         <div className="relative mb-16">
           <div className="flex flex-wrap justify-center gap-2 md:gap-8 bg-[#1e293b] p-4 rounded-xl shadow-lg">
             {Object.keys(projects).map((tab) => (
@@ -130,7 +135,7 @@ const Portfolio = ({ isPortfolio = false }) => {
       {/* Project display area */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={isPortfolio ? "all-projects" : activeTab}
+          key={isFullDisplay ? "all-projects" : activeTab}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -150,7 +155,7 @@ const Portfolio = ({ isPortfolio = false }) => {
                 className={`grid md:grid-cols-2 gap-8 items-center`}
               >
                 {/* Text content - switches sides based on index */}
-                <div className="md:order-2">
+                <div className={index % 2 === 1 ? "md:order-2" : ""}>
                   <div className="text-[#00bcd4] mb-2 font-medium">
                     {project.category}
                   </div>
@@ -163,7 +168,11 @@ const Portfolio = ({ isPortfolio = false }) => {
 
                 {/* Image content - switches sides based on index */}
                 <div
-                  className={`${project.color} p-4 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300`}
+                  className={`${
+                    project.color
+                  } p-4 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 ${
+                    index % 2 === 1 ? "md:order-1" : ""
+                  }`}
                 >
                   <img
                     src={project.image}
@@ -178,14 +187,14 @@ const Portfolio = ({ isPortfolio = false }) => {
       </AnimatePresence>
 
       {/* Show 'View All Projects' button only in tabbed mode and not on full portfolio page */}
-      {!isPortfolio && (
+      {!isFullDisplay && (
         <motion.div
           className="text-center mt-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <Button text={"View All Projects"} />
+          <Button text={"View All Projects"} onClick={() => navigate('/portfolio')} />
         </motion.div>
       )}
     </div>

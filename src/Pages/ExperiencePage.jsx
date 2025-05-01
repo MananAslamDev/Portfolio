@@ -1,7 +1,7 @@
 import Experience from "../Components/Experience";
 
 const ExperiencePage = () => {
-  return <Experience />;
+  return <Experience isFullDisplay={true}/>;
 };
 
 export default ExperiencePage;

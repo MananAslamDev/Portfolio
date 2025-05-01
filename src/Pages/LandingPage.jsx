@@ -9,9 +9,9 @@ const LandingPage = () => {
         <>
             <Home/>
             <About/>
-            <Portfolio isPortfolio={false}/>
-            <Services/>
-            <Experience/>
+            <Portfolio isFullDisplay={false}/>
+            <Services />
+            <Experience isFullDisplay={false}/>
         </>
     )
 }

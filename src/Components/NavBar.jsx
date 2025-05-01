@@ -45,7 +45,10 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="NavItems">
-            <NavLink to="/portfolio" className="text-white hover:text-[#00bcd4]">
+            <NavLink
+              to="/portfolio"
+              className="text-white hover:text-[#00bcd4]"
+            >
               PORTFOLIO
             </NavLink>
           </li>
@@ -55,12 +58,24 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="NavItems">
-            <NavLink to="/experience" className="text-white hover:text-[#00bcd4]">
+            <NavLink
+              to="/experience"
+              className="text-white hover:text-[#00bcd4]"
+            >
               EXPERIENCE
             </NavLink>
           </li>
           <li className="NavItems">
-            <Button text="Contact" className="GradientButton" />
+            <Button
+              text="Contact"
+              className="GradientButton"
+              onClick={() => {
+                const section = document.getElementById("contact");
+                if (section) {
+                  section.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+            />
           </li>
         </ul>
       </nav>

@@ -13,7 +13,7 @@ const About = () => {
       initial={{ opacity: 0, y: 100 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="flex flex-col justify-center gap-40 mt-[180px] items-center lg:flex-row md:flex-row"
+      className="flex flex-col justify-center gap-40 mt-[100px] items-center lg:flex-row md:flex-row"
     >
       <div className="mx-auto md:mx-0">
         <img
@@ -39,7 +39,15 @@ const About = () => {
           <br /> Let’s create something impactful together!
         </p>
         <div className="flex space-x-4">
-          <Button text={"Hire Me"} />
+          <Button
+            text={"Hire Me"}
+            onClick={() => {
+              const section = document.getElementById("contact");
+              if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+          />
           <Button text="Resume" variant="outline" />
         </div>
       </div>
