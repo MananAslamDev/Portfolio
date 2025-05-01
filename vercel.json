@@ -1,5 +1,0 @@
-{
-    "buildCommand": "sudo npm run build",
-    "outputDirectory": "dist"
-  }
-  
