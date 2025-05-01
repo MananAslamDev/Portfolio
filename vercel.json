@@ -1,5 +1,12 @@
 {
-    "buildCommand": "node ./node_modules/vite/bin/vite.js build",
-    "installCommand": "npm install",
-    "framework": "vite"
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": {
+        "nodeVersion": "18.x"
+      }
+    }
+  ]
+}
