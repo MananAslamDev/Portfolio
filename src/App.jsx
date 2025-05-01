@@ -10,13 +10,13 @@ import ExperiencePage from "./Pages/ExperiencePage";
 function App() {
   return (
     <Router>
-      <Routes >
-        <Route element={<Layout />}> 
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/experience" element={<ExperiencePage />} />
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
         </Route>
       </Routes>
     </Router>
